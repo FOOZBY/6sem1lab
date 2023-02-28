@@ -19,11 +19,6 @@ public:
 		}
 	};
 	Node* root;
-private:
-
-
-	void print_tree_as_tree(Node* node, int lvl);
-	void inorder(Node* node);
 	Node* min_elem_ret(Node*& node)
 	{
 		if (node->left != nullptr)
@@ -35,6 +30,12 @@ private:
 			return node;
 		}
 	}
+private:
+
+
+	void print_tree_as_tree(Node* node, int lvl);
+	void inorder(Node* node);
+	
 	void add_new_elem(Node*& node, int data);
 	Node* search_elem(Node*& node, int data)
 	{
@@ -121,6 +122,11 @@ inline void Tree::remove(int data)
 		cout << "такого элемента нет в дереве" << endl;
 		return;
 	}
+	if (node == this->root)
+	{
+		Node* temp = node;
+		
+	}
 	if (node->left == nullptr && node->right == nullptr)
 	{
 		if (parent->left == node)
@@ -132,9 +138,9 @@ inline void Tree::remove(int data)
 	}
 	if (node->left == nullptr)
 	{
-		if (parent->left == node)
+		if (parent->left && parent->left == node)
 			parent->left = node->right;
-		if (parent->right == node)
+		if (parent->right && parent->right == node)
 			parent->right = node->right;
 		delete node;
 		return;
@@ -153,13 +159,13 @@ inline void Tree::remove(int data)
 		Node* temp = nullptr;
 		temp = min_elem_ret(node->right);
 		remove(temp->data);
-		if (parent->left == node)
+		if (parent->left && parent->left == node)
 		{
 			parent->left = temp;
 			temp->left = node->left;
 			temp->right = node->right;
 		}
-		if (parent->right == node)
+		if (parent->right && parent->right == node)
 		{
 			parent->right = temp;
 			temp->left = node->left;
@@ -229,7 +235,7 @@ inline void Tree::print_tree_as_tree(Node* node, int lvl)
 		print_tree_as_tree(node->right, lvl + 1);
 		for (int i = 0; i < lvl; i++)
 			cout << "\t";
-		cout << ".........." << node->data << endl;
+		cout << "........" << node->data << endl;
 		print_tree_as_tree(node->left, lvl + 1);
 	}
 }

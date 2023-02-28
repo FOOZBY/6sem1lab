@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="Header.h" />
     <ClInclude Include="tree_to_avl.h" />
+    <ClInclude Include="tree_to_rbt.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -78,9 +78,50 @@ class Avl : public Tree
 		}
 	}
 
+	Node* removemin(Node* p) // удаление узла с минимальным ключом из дерева p
+	{
+		if (p->left == 0)
+			return p->right;
+		p->left = removemin(p->left);
+		return balance(p);
+	}
+
+	Node* rem_elem(Node* p,int data)
+	{
+		if (!p) return 0;
+		if (data < p->data)
+			p->left = rem_elem(p->left, data);
+		else if (data > p->data)
+			p->right = rem_elem(p->right, data);
+		else //  data == p->data 
+		{
+			Node* q = p->left;
+			Node* r = p->right;
+			delete p;
+			if (!r) return q;
+			Node* min = min_elem_ret(r);
+			min->right = removemin(r);
+			min->left = q;
+			return balance(min);
+		}
+		return balance(p);
+	}
+
 public:
 	void insert(int data)
 	{
 		add_new_elem(root, data);
 	}
+	void remove(int data)
+	{
+		if (data == this->root->data)
+		{
+			this->root = rem_elem(root, data);
+		}
+		else
+		{
+			rem_elem(root, data);
+		}
+	}
+
 };
