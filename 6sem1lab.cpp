@@ -3,11 +3,12 @@
 
 int main()
 {
+	setlocale(0, "");
 	srand(time(NULL));
 
 	Tree tRee;
 
-	/*tRee.insert(7);
+	tRee.insert(7);
 	tRee.insert(4);
 	tRee.insert(6);
 	tRee.insert(5);
@@ -15,17 +16,17 @@ int main()
 	tRee.insert(8);
 	tRee.insert(10);
 	tRee.insert(9);
-	tRee.insert(11);*/
+	tRee.insert(11);
 
-	for (int i = 0; i < 15; i++)
-	{
-		tRee.insert(i);
-		//tRee.insert(rand() % 50);
-	}
+	//for (int i = 0; i < 15; i++)
+	//{
+	//	tRee.insert(i);
+	//	//tRee.insert(rand() % 50);
+	//}
 
 	tRee.Print_tree_as_tree();
 	tRee.Find_depth();
-	tRee.remove(0);
+	tRee.remove(7);
 	tRee.Print_tree_as_tree();
 	tRee.Find_depth();
 

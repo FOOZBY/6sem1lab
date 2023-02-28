@@ -54,6 +54,33 @@ private:
 	}
 	void del_all(Node*& current);
 	int find_depth(Node* tree);
+	Node* rem_elem(Node* p, int data)
+	{
+		if (p == nullptr)
+			return nullptr;
+		if (data < p->data)
+			p->left = rem_elem(p->left, data);
+		else if (data > p->data)
+			p->right = rem_elem(p->right, data);
+		else //  data == p->data 
+		{
+			if (p->left && p->right)
+			{
+				p->data = min_elem_ret(p->right)->data;
+				p->right = rem_elem(p->right, p->data);
+			}
+			else
+			{
+				if (p->left != nullptr)
+					p = p->left;
+				else if (p->right != nullptr)
+					p = p->right;
+				else
+					p = nullptr;
+			}
+		}
+		return p;
+	}
 	
 public:
 	Tree();
@@ -69,7 +96,17 @@ public:
 		return search_elem(root, data);
 	}
 
-	void remove(int data);
+	void remove(int data)
+	{
+		if (data == this->root->data)
+		{
+			this->root = rem_elem(root, data);
+		}
+		else
+		{
+			rem_elem(root, data);
+		}
+	}
 
 	void Inorder()
 	{
@@ -86,7 +123,7 @@ public:
 
 	void Find_depth()
 	{
-		cout << find_depth(root) << endl;
+		cout << "Depth = " << find_depth(root) << endl;
 	}
 };
 
@@ -99,81 +136,6 @@ Tree::~Tree()
 {
 	this->del_all(this->root);
 	this->root = nullptr;
-}
-
-inline void Tree::remove(int data)
-{
-	Node* node = root;
-	Node* parent = nullptr;
-	while (node && node->data != data)
-	{
-		parent = node;
-		if (data < node->data)
-		{
-			node = node->left;
-		}
-		else
-		{
-			node = node->right;
-		}
-	}
-	if (node == nullptr)
-	{
-		cout << "такого элемента нет в дереве" << endl;
-		return;
-	}
-	if (node == this->root)
-	{
-		Node* temp = node;
-		
-	}
-	if (node->left == nullptr && node->right == nullptr)
-	{
-		if (parent->left == node)
-			parent->left = nullptr;
-		if (parent->right == node)
-			parent->right = nullptr;
-		delete node;
-		return;
-	}
-	if (node->left == nullptr)
-	{
-		if (parent->left && parent->left == node)
-			parent->left = node->right;
-		if (parent->right && parent->right == node)
-			parent->right = node->right;
-		delete node;
-		return;
-	}
-	if (node->right == nullptr)
-	{
-		if (parent->left == node)
-			parent->left = node->left;
-		if (parent->right == node)
-			parent->right = node->left;
-		delete node;
-		return;
-	}
-	if (node->left && node->right)
-	{
-		Node* temp = nullptr;
-		temp = min_elem_ret(node->right);
-		remove(temp->data);
-		if (parent->left && parent->left == node)
-		{
-			parent->left = temp;
-			temp->left = node->left;
-			temp->right = node->right;
-		}
-		if (parent->right && parent->right == node)
-		{
-			parent->right = temp;
-			temp->left = node->left;
-			temp->right = node->right;
-		}
-		delete node;
-		return;
-	}
 }
 
 inline int Tree::find_depth(Node* tree)
