@@ -110,7 +110,7 @@ class Avl : public Tree
 public:
 	void insert(int data)
 	{
-		add_new_elem(root, data);
+		add_new_elem(this->root, data);
 	}
 	void remove(int data)
 	{
@@ -123,5 +123,4 @@ public:
 			rem_elem(root, data);
 		}
 	}
-
 };

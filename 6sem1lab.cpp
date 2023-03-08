@@ -1,44 +1,48 @@
 ﻿#include "tree_to_avl.h"
-//#include "tree_to_rbt.h"
+#include "tree_to_rbt.h"
 
 int main()
 {
 	setlocale(0, "");
 	srand(time(NULL));
 
-	Tree tRee;
-
-	tRee.insert(7);
-	tRee.insert(4);
-	tRee.insert(6);
-	tRee.insert(5);
-	tRee.insert(3);
-	tRee.insert(8);
-	tRee.insert(10);
-	tRee.insert(9);
-	tRee.insert(11);
-
-	//for (int i = 0; i < 15; i++)
-	//{
-	//	tRee.insert(i);
-	//	//tRee.insert(rand() % 50);
-	//}
-
-	tRee.Print_tree_as_tree();
-	tRee.Find_depth();
-	tRee.remove(7);
-	tRee.Print_tree_as_tree();
-	tRee.Find_depth();
-
-	Avl tree;
+	Tree bst_tree;
 
 	for (int i = 0; i < 15; i++)
 	{
-		tree.insert(i);
+		//tRee.insert(i);
+		bst_tree.insert(rand() % 50);
 	}
-	tree.Print_tree_as_tree();
-	tree.Find_depth();
-	tree.remove(7);
-	tree.Print_tree_as_tree();
+
+	bst_tree.Print_tree_as_tree();
+	bst_tree.Find_depth();
+
+
+	/////////////////////////////////////////////////
+
+
+	Avl avl_tree;
+
+	for (int i = 0; i < 15; i++)
+	{
+		//tree.insert(i);
+		avl_tree.insert(rand() % 50);
+	}
+	avl_tree.Print_tree_as_tree();
+	avl_tree.Find_depth();
+
+	/////////////////////////////////////////////////
+
+
+	RBT rbt_tree;
+
+	for (int i = 0; i < 15; i++)
+	{
+		//rbt_tree.insert(i);
+		rbt_tree.insert(rand() % 50);
+	}
+	rbt_tree.Print_tree_as_tree();
+	rbt_tree.Find_depth();
+
 	system("pause");	
 }

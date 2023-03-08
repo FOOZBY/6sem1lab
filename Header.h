@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <time.h>
 using namespace std;
@@ -8,8 +9,10 @@ public:
 	struct Node
 	{
 		Node* left, * right;
+		Node* parent = nullptr;
 		int data;
 		int height;
+		bool color = true;//red
 		Node(int data, Node* left = nullptr, Node* right = nullptr, int height = 1)
 		{
 			this->data = data;
@@ -30,10 +33,8 @@ public:
 			return node;
 		}
 	}
-private:
-
-
 	void print_tree_as_tree(Node* node, int lvl);
+private:
 	void inorder(Node* node);
 	
 	void add_new_elem(Node*& node, int data);
@@ -84,7 +85,6 @@ private:
 	
 public:
 	Tree();
-	~Tree();
 
 	void insert(int data)
 	{
@@ -130,12 +130,6 @@ public:
 Tree::Tree()
 {
 	root = nullptr;
-}
-
-Tree::~Tree()
-{
-	this->del_all(this->root);
-	this->root = nullptr;
 }
 
 inline int Tree::find_depth(Node* tree)
@@ -192,7 +186,7 @@ inline void Tree::inorder(Node* node)
 
 inline void Tree::print_tree_as_tree(Node* node, int lvl)
 {
-	if (node != nullptr)
+	if (node != nullptr && node->data != -1)
 	{
 		print_tree_as_tree(node->right, lvl + 1);
 		for (int i = 0; i < lvl; i++)
@@ -201,12 +195,3 @@ inline void Tree::print_tree_as_tree(Node* node, int lvl)
 		print_tree_as_tree(node->left, lvl + 1);
 	}
 }
-
-class MyClass : public Tree
-{
-public:
-
-
-private:
-
-};
