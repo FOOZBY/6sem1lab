@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <time.h>
+#include <chrono>
 using namespace std;
 
 class Tree
@@ -82,9 +83,23 @@ private:
 		}
 		return p;
 	}
-	
+	void del(Node* curr)
+	{
+		if (curr)
+		{
+			del(curr->left);
+			del(curr->right);
+			delete curr;
+		}
+	}
 public:
 	Tree();
+
+	void clear()
+	{
+		del(this->root);
+		root = nullptr;
+	}
 
 	void insert(int data)
 	{

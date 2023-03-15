@@ -280,6 +280,17 @@ class RBT : public Tree
         }
     }
 
+    void del(Node* curr)
+    {
+
+        if (curr && curr != TNULL)
+        {
+            del(curr->left);
+            del(curr->right);
+            delete curr;
+        }
+    }
+
 public:
     RBT() 
     {
@@ -346,5 +357,11 @@ public:
     void remove(int data) 
     {
         deleteNodeRBTHelper(this->root, data);
+    }
+
+    void clear()
+    {
+        del(this->root);
+        root = TNULL;
     }
 };
